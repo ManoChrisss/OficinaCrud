@@ -1,0 +1,23 @@
+# Build folders
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider IDE
+.idea/
+
+# Others
+*.log
+*.vsix
+*.nupkg
+*.cache
+
+# Windows
+Thumbs.db
+Desktop.ini
