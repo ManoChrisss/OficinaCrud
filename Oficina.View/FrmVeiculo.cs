@@ -9,7 +9,7 @@ namespace Oficina.View
 {
     public partial class FrmVeiculo : Form
     {
-        // interface
+        // --- Campos de interface ---
         private Label lblCliente, lblMarca, lblModelo, lblAno, lblPlaca;
         private ComboBox cmbCliente;
         private TextBox txtMarca, txtModelo, txtAno, txtPlaca;
@@ -33,11 +33,11 @@ namespace Oficina.View
 
         private void BuildUi()
         {
-            //Label com combobox de clientes
+            // --- Label e ComboBox de Cliente ---
             lblCliente = new Label { Text = "Cliente:", AutoSize = true, Location = new Point(20, 18), Font = new Font("Segoe UI", 10F, FontStyle.Regular) };
             cmbCliente = new ComboBox { Location = new Point(110, 14), Size = new Size(480, 26), DropDownStyle = ComboBoxStyle.DropDownList, Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right };
 
-            // veiculo
+            // --- Campos do veículo ---
             lblMarca = new Label { Text = "Marca:", Location = new Point(20, 58), AutoSize = true };
             txtMarca = new TextBox { Location = new Point(110, 54), Size = new Size(300, 26) };
 
@@ -50,6 +50,7 @@ namespace Oficina.View
             lblPlaca = new Label { Text = "Placa:", Location = new Point(250, 134), AutoSize = true };
             txtPlaca = new TextBox { Location = new Point(300, 130), Size = new Size(110, 26) };
 
+            // --- Botões ---
             btnIncluir = new Button { Text = "Incluir", Location = new Point(110, 178), Size = new Size(100, 34) };
             btnAlterar = new Button { Text = "Alterar", Location = new Point(220, 178), Size = new Size(100, 34) };
             btnExcluir = new Button { Text = "Excluir", Location = new Point(330, 178), Size = new Size(100, 34) };
@@ -60,7 +61,7 @@ namespace Oficina.View
             btnExcluir.Click += BtnExcluir_Click;
             btnConsultar.Click += BtnConsultar_Click;
 
-            // DataGridView
+            // --- DataGridView ---
             dgvVeiculos = new DataGridView
             {
                 Location = new Point(20, 230),
@@ -74,7 +75,7 @@ namespace Oficina.View
             };
             dgvVeiculos.CellClick += DgvVeiculos_CellClick;
 
-            // Add
+            // --- Adiciona controles ao formulário ---
             Controls.Add(lblCliente);
             Controls.Add(cmbCliente);
             Controls.Add(lblMarca);
@@ -97,7 +98,7 @@ namespace Oficina.View
             Text = "Cadastro de Veículos";
         }
 
-        // Eventos
+        // --- Eventos dos botões ---
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
             if (!ValidarCampos()) return;
