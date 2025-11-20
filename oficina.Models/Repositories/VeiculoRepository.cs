@@ -26,26 +26,40 @@ namespace oficina.Models.Repositories
 
         public void Alterar(Veiculo oVeiculo)
         {
-            db.Entry(oVeiculo).State = EntityState.Modified;
+            var veiculoBanco = db.Veiculos.FirstOrDefault(v => v.VeiculoId == oVeiculo.VeiculoId);
+
+            if (veiculoBanco == null)
+                throw new Exception("Veículo não encontrado para alteração.");
+
+            // Atualiza apenas os campos desejados
+            veiculoBanco.ClienteId = oVeiculo.ClienteId;
+            veiculoBanco.Marca = oVeiculo.Marca;
+            veiculoBanco.Modelo = oVeiculo.Modelo;
+            veiculoBanco.Ano = oVeiculo.Ano;
+            veiculoBanco.Placa = oVeiculo.Placa;
+
             db.SaveChanges();
         }
+
 
         public bool Excluir(int id)
         {
             var veiculo = db.Veiculos
-                            .Include(v => v.OrdensServicos) // Inclui ordens associadas
+                            .Include(v => v.OrdensServicos)
                             .FirstOrDefault(v => v.VeiculoId == id);
 
             if (veiculo == null)
-                return false; // Veículo não encontrado
+                return false;
 
             if (veiculo.OrdensServicos.Any())
-                return false; // Não pode excluir pois tem ordens
+                return false; 
 
             db.Veiculos.Remove(veiculo);
             db.SaveChanges();
-            return true; // Exclusão realizada
+            return true;
         }
+
+
 
 
         public Veiculo? Selecionar(int id)
@@ -63,7 +77,7 @@ namespace oficina.Models.Repositories
                      .ToList();
         }
 
-        // 🔹 Apenas os clientes sem veículos cadastrados
+        // Apenas os clientes sem veículos cadastrados
         public List<Cliente> SelecionarClientesSemVeiculos()
         {
             return db.Clientes
